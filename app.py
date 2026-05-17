@@ -8,7 +8,7 @@ import tools_logic as logic
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-now = datetime.now(ZoneInfo("Africa/Cairo"))
+now = datetime.now(ZoneInfo("Africa/Egypt"))
 
 
 # ── Page Config ───────────────────────────────────────────────────────────────
