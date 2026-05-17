@@ -4,12 +4,13 @@ from dotenv import load_dotenv
 from google import genai
 import tools_logic as logic
 import tools_schemas as schemas
+import streamlit as st
 
 load_dotenv()
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-api_key = os.environ.get("GEMINI_API_KEY")
+api_key = st.secrets["GEMINI_API_KEY"]
 client = genai.Client(api_key=api_key)
 
 SYSTEM_PROMPT = (
