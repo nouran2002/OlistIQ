@@ -7,7 +7,7 @@ from google import genai
 import tools_logic as logic
 from datetime import datetime, timezone, timedelta
 
-TZ = timezone(timedelta(hours=+3))
+TZ = ZoneInfo("Africa/Cairo")
 now = datetime.now(TZ)
 
 
@@ -379,7 +379,7 @@ st.markdown(f"""
 st.markdown(f"""
 <div style="display:flex;align-items:center">
     <span class="live-dot"></span>
-    <span class="live-text">LIVE · {now.strftime('%d %b %Y  %H:%M')}</span>
+    <span class="live-text">LIVE · {now.datetime('%d %b %Y  %H:%M')}</span>
 </div>
 """, unsafe_allow_html=True)
 
