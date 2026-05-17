@@ -8,8 +8,6 @@ import tools_logic as logic
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-now = datetime.now(ZoneInfo("Africa/Cairo"))
-
 
 
 
@@ -364,6 +362,10 @@ CL = dict(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
 
 SEG_C = {'Champions':'#0079FF','Loyal-customer':'#0079FF','New-customer':'#0079FF',
           'At-Risk':'#AC0000','Churned':'#AC0000','Other':'#0079FF'}
+
+# ── NOW — Cairo time (called fresh every render, NOT cached) ──────────────────
+now = datetime.now(ZoneInfo("Africa/Cairo"))
+
 # ── TOP BAR ───────────────────────────────────────────────────────────────────
 st.markdown(f"""
 <div class="topbar">
@@ -375,11 +377,11 @@ st.markdown(f"""
       <div class="brand-name">Olist<span class="brand-iq">IQ</span></div>
       <div class="brand-sub">✦ THINK SMARTER WITH YOUR DATA</div>
     </div>
-""", unsafe_allow_html=True)
-st.markdown(f"""
-<div style="display:flex;align-items:center">
+  </div>
+  <div style="display:flex;align-items:center">
     <span class="live-dot"></span>
-    <span class="live-text">LIVE · {now.datetime('%d %b %Y  %H:%M')}</span>
+    <span class="live-text">LIVE · {now.strftime('%d %b %Y  %H:%M')}</span>
+  </div>
 </div>
 """, unsafe_allow_html=True)
 
