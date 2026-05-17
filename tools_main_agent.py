@@ -1,6 +1,5 @@
 import sys
 import os
-from dotenv import load_dotenv
 from google import genai
 import tools_logic as logic
 import tools_schemas as schemas
