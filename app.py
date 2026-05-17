@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from google import genai
 import tools_logic as logic
 
-load_dotenv()
+
 
 # ── Page Config ───────────────────────────────────────────────────────────────
 st.set_page_config(
