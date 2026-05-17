@@ -375,11 +375,11 @@ st.markdown(f"""
       <div class="brand-name">Olist<span class="brand-iq">IQ</span></div>
       <div class="brand-sub">✦ THINK SMARTER WITH YOUR DATA</div>
     </div>
-  </div>
-  <div style="display:flex;align-items:center">
+""", unsafe_allow_html=True)
+st.markdown(f"""
+<div style="display:flex;align-items:center">
     <span class="live-dot"></span>
     <span class="live-text">LIVE · {now.strftime('%d %b %Y  %H:%M')}</span>
-  </div>
 </div>
 """, unsafe_allow_html=True)
 
