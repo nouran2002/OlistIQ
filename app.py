@@ -5,6 +5,11 @@ import plotly.graph_objects as go
 from dotenv import load_dotenv
 from google import genai
 import tools_logic as logic
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+TZ = ZoneInfo("Africa/Cairo")
+now = datetime.now(TZ)
 
 
 
@@ -361,10 +366,6 @@ CL = dict(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
 SEG_C = {'Champions':'#0079FF','Loyal-customer':'#0079FF','New-customer':'#0079FF',
           'At-Risk':'#AC0000','Churned':'#AC0000','Other':'#0079FF'}
 # ── TOP BAR ───────────────────────────────────────────────────────────────────
-from datetime import datetime
-from zoneinfo import ZoneInfo
-TZ = timezone(timedelta(hours=3))
-now = datetime.now(TZ)
 st.markdown(f"""
 <div class="topbar">
   <div style="display:flex;align-items:center;gap:10px">
