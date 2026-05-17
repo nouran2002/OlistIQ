@@ -269,8 +269,11 @@ for k, v in [("chat_open", False), ("messages", []),
 # ── Agent ─────────────────────────────────────────────────────────────────────
 @st.cache_resource
 def get_gemini_client():
-    """Cache only the client, not the chat session."""
-    api_key = os.environ.get("GEMINI_API_KEY")
+    try:
+        api_key = st.secrets["GEMINI_API_KEY"]
+    except Exception:
+        api_key = os.environ.get("GEMINI_API_KEY")
+
     if not api_key:
         return None
     return genai.Client(api_key=api_key)
