@@ -62,7 +62,7 @@ class OlistETLPipeline:
 
         for col in date_cols:
             if col in orders_items.columns:
-                orders_items[col] = pd.to_datetime(orders_items[col],errors="coerce",infer_datetime_format=True)
+                orders_items[col] = pd.to_datetime(orders_items[col],errors="coerce")
         orders_items["total_item_price"] = (
             orders_items["price"] + orders_items["freight_value"]
         )
