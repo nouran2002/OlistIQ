@@ -380,7 +380,7 @@ st.markdown(f"""
 st.markdown(f"""
 <div style="display:flex;align-items:center">
     <span class="live-dot"></span>
-    <span class="live-text">LIVE · {now.strftime('%d %b %Y  %H:%M')}</span>
+    <span class="live-text">LIVE · {datetime.now(ZoneInfo("Africa/Cairo")).strftime('%d %b %Y  %H:%M')}</span>
 </div>
 """, unsafe_allow_html=True)
 
