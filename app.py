@@ -364,7 +364,8 @@ SEG_C = {'Champions':'#0079FF','Loyal-customer':'#0079FF','New-customer':'#0079F
           'At-Risk':'#AC0000','Churned':'#AC0000','Other':'#0079FF'}
 # ── TOP BAR ───────────────────────────────────────────────────────────────────
 from datetime import datetime
-now = datetime.now()
+from zoneinfo import ZoneInfo
+now = datetime.now(ZoneInfo("Africa/Egypt"))
 st.markdown(f"""
 <div class="topbar">
   <div style="display:flex;align-items:center;gap:10px">
