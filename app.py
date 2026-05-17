@@ -785,16 +785,30 @@ def get_rfm_segs():
     return logic._rfm_df.groupby('Segment').agg(count=('Monetary','count'), revenue=('Monetary','sum'), avg_ltv=('Monetary','mean')).reset_index()
 
 # ── Chart theme ───────────────────────────────────────────────────────────────
-CL = dict(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-          font=dict(family='Outfit',color='#7A9BCF',size=11),
-          margin=dict(l=0,r=0,t=8,b=0),
-          xaxis=dict(gridcolor='#0C1A28',showline=False,tickfont=dict(size=10)),
-          yaxis=dict(gridcolor='#0C1A28',showline=False,tickfont=dict(size=10)),
-          showlegend=False,
-          hoverlabel=dict(bgcolor='#0A1220',bordercolor='#162840',font=dict(family='JetBrains Mono',size=11,color='#E8F4FF')))
+CL = dict(
+    paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+    font=dict(family='Outfit', color='#8ab4e8', size=11),
+    margin=dict(l=0, r=0, t=8, b=0),
+    xaxis=dict(gridcolor='rgba(60,120,255,0.08)', showline=False,
+               zeroline=False, tickfont=dict(size=10, color='#4a6f9a')),
+    yaxis=dict(gridcolor='rgba(60,120,255,0.08)', showline=False,
+               zeroline=False, tickfont=dict(size=10, color='#4a6f9a')),
+    showlegend=False,
+    hoverlabel=dict(
+        bgcolor='#04102e',
+        bordercolor='#1a6fff',
+        font=dict(family='JetBrains Mono', size=11, color='#a0c4ff')
+    )
+)
 
-SEG_C = {'Champions':'#0079FF','Loyal-customer':'#0079FF','New-customer':'#0079FF',
-          'At-Risk':'#AC0000','Churned':'#AC0000','Other':'#0079FF'}
+SEG_C = {
+    'Champions':      '#00d4ff',   # cyan — top tier
+    'Loyal-customer': '#3d8bff',   # bright blue
+    'New-customer':   '#1a6fff',   # core blue
+    'At-Risk':        '#ff8c42',   # amber-orange warning
+    'Churned':        '#ff3355',   # red alert
+    'Other':          '#4a6f9a',   # muted blue-grey
+}
 
 # ── NOW — Cairo time (called fresh every render, NOT cached) ──────────────────
 now = datetime.now(ZoneInfo("Africa/Cairo"))
@@ -805,7 +819,7 @@ st.markdown(f"""
   <div style="display:flex;align-items:center;gap:10px">
     <!-- Olist logo SVG (official blue style) -->
     <img src="https://d2r9epyceweg5n.cloudfront.net/apps/2-30-pt_BR-logo-olist.png" alt="Olist Logo" width="150" height="100">
-    <div style="width:1px;height:10px;background:var(--border2)"></div>
+    <div style="width:1px;height:10px;background:rgba(60,120,255,0.3)"></div>
     <div>
       <div class="brand-name">Olist<span class="brand-iq">IQ</span></div>
       <div class="brand-sub">✦ THINK SMARTER WITH YOUR DATA</div>
@@ -838,10 +852,10 @@ if data_ok:
           <div class="hero-title">BUSINESS<br><span>INTELLIGENCE</span><br>PLATFORM</div>
           <div class="hero-sub">Olist E-Commerce · AI-Powered · Real-Time Data</div>
         </div>
-        <div style="text-align:right;font-family:var(--mono);font-size:11px;color:var(--text3);line-height:1.9">
-          <span style="font-family:var(--display);font-size:32px;color:var(--text2);letter-spacing:2px;display:block">{now.strftime('%H:%M')}</span>
+        <div style="text-align:right;font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);line-height:1.9">
+          <span style="font-family:var(--font-display);font-size:32px;color:var(--text-secondary);letter-spacing:2px;display:block">{now.strftime('%H:%M')}</span>
           {now.strftime('%A, %B %d %Y')}<br>
-          <span style="color:var(--green2)">▲ AUTO-REFRESH ACTIVE</span>
+          <span style="color:var(--cyan)">▲ AUTO-REFRESH ACTIVE</span>
         </div>
       </div>
       <div class="kpi-strip">
@@ -908,9 +922,12 @@ with tab1:
             st.markdown('<div class="panel-title">MONTHLY REVENUE <span class="panel-badge">LIVE</span></div><div class="panel-sub">Payment value · all categories</div>', unsafe_allow_html=True)
             fig = go.Figure()
             fig.add_trace(go.Scatter(x=mdf['month'], y=mdf['revenue'],
-                fill='tozeroy', fillcolor='rgba(11,77,229,0.3)',
-                line=dict(color='#0b4de5',width=2), mode='lines+markers',
-                marker=dict(size=4,color='#0b4de5'),
+                fill='tozeroy',
+                fillcolor='rgba(0,212,255,0.06)',
+                line=dict(color='#00d4ff', width=2.5),
+                mode='lines+markers',
+                marker=dict(size=5, color='#00d4ff',
+                            line=dict(color='rgba(0,212,255,0.3)', width=6)),
                 hovertemplate='<b>%{x}</b><br>$%{y:,.0f}<extra></extra>'))
             fig.update_layout(**CL, height=240)
             fig.update_xaxes(tickangle=-45)
@@ -920,11 +937,11 @@ with tab1:
         with c2:
             st.markdown('<div class="chart-panel">', unsafe_allow_html=True)
             st.markdown('<div class="panel-title">GROWTH %</div><div class="panel-sub">Month-over-month change</div>', unsafe_allow_html=True)
-            colors_b = ['#0b4de5' if v>=0 else '#AC0000' for v in mdf['growth'].fillna(0)]
+            colors_b = ['#3d8bff' if v>=0 else '#ff3355' for v in mdf['growth'].fillna(0)]
             fig2 = go.Figure()
             fig2.add_trace(go.Bar(x=mdf['month'], y=mdf['growth'].fillna(0),
                 marker_color=colors_b, hovertemplate='<b>%{x}</b><br>%{y:.1f}%<extra></extra>'))
-            fig2.add_hline(y=0, line_color='#162840', line_width=1)
+            fig2.add_hline(y=0, line_color='rgba(60,120,255,0.25)', line_width=1)
             fig2.update_layout(**CL, height=240)
             fig2.update_xaxes(tickangle=-45)
             st.plotly_chart(fig2,width='stretch', config={'displayModeBar':False})
@@ -934,9 +951,12 @@ with tab1:
         st.markdown('<div class="panel-title">ORDER VOLUME <span class="panel-badge">TREND</span></div><div class="panel-sub">Unique orders per month</div>', unsafe_allow_html=True)
         fig3 = go.Figure()
         fig3.add_trace(go.Scatter(x=mdf['month'], y=mdf['orders'],
-            fill='tozeroy', fillcolor='rgba(11,77,229,0.3)',
-            line=dict(color='#0b4de5',width=2), mode='lines+markers',
-            marker=dict(size=4,color='#0b4de5'),
+            fill='tozeroy',
+            fillcolor='rgba(61,139,255,0.07)',
+            line=dict(color='#3d8bff', width=2.5),
+            mode='lines+markers',
+            marker=dict(size=5, color='#3d8bff',
+                        line=dict(color='rgba(61,139,255,0.3)', width=6)),
             hovertemplate='<b>%{x}</b><br>%{y:,} orders<extra></extra>'))
         fig3.update_layout(**CL, height=180)
         fig3.update_xaxes(tickangle=-45)
@@ -951,7 +971,7 @@ with tab2:
             st.markdown('<div class="chart-panel">', unsafe_allow_html=True)
             st.markdown('<div class="panel-title">TOP 10 CATEGORIES</div><div class="panel-sub">All time · by revenue</div>', unsafe_allow_html=True)
             fig4 = go.Figure(go.Bar(y=cdf['category'], x=cdf['revenue'], orientation='h',
-                marker=dict(color=cdf['revenue'], colorscale=[[0,'#E8F0FC'],[1,'#0b4de5']], showscale=False),
+                marker=dict(color=cdf['revenue'], colorscale=[[0,'#071a4a'],[0.4,'#1a6fff'],[1,'#00d4ff']], showscale=False, line=dict(color='rgba(0,212,255,0.15)', width=0.5)),
                 hovertemplate='<b>%{y}</b><br>$%{x:,.0f}<extra></extra>'))
             fig4.update_layout(**CL, height=340)
             fig4.update_yaxes(tickfont=dict(size=10), autorange='reversed')
@@ -961,9 +981,9 @@ with tab2:
         with c2:
             st.markdown('<div class="chart-panel">', unsafe_allow_html=True)
             st.markdown('<div class="panel-title">REVENUE SHARE</div><div class="panel-sub">% of total · top 10</div>', unsafe_allow_html=True)
-            pie_c = ['#BBDEFB','#64B5F6','#2196F3','#1976D2','#0D47A1','#032669','#031753','#5C0000','#850000','#AC0000']
+            pie_c = ['#00d4ff','#3d8bff','#1a6fff','#0055ff','#0040cc','#002fa0','#071a4a','#ff8c42','#ff5500','#ff3355']
             fig5 = go.Figure(go.Pie(labels=cdf['category'], values=cdf['revenue'], hole=0.62,
-                marker=dict(colors=pie_c, line=dict(color='#445ab7',width=2)),
+                marker=dict(colors=pie_c, line=dict(color='#020818', width=2)),
                 hovertemplate='<b>%{label}</b><br>$%{value:,.0f}<br>%{percent}<extra></extra>', textinfo='none'))
             fig5.add_annotation(text=f"${cdf['revenue'].sum()/1e6:.1f}M", x=0.5, y=0.5,
                 showarrow=False, font=dict(family='Bebas Neue',size=26,color='#fff'))
@@ -1005,9 +1025,9 @@ with tab3:
                 mode='markers+text',
                 marker=dict(size=rdf['revenue']/rdf['revenue'].max()*60+10,
                     color=[SEG_C.get(s,'#455A64') for s in rdf['Segment']],
-                    opacity=0.85, line=dict(color='#0A0E1A',width=2)),
+                    opacity=0.88, line=dict(color='#020818', width=2)),
                 text=rdf['Segment'], textposition='top center',
-                textfont=dict(size=9,color='#7A9BCF'),
+                textfont=dict(size=9, color='#8ab4e8'),
                 hovertemplate='<b>%{text}</b><br>Count: %{x:,}<br>Avg LTV: $%{y:,.0f}<extra></extra>'))
             fig7.update_layout(**CL, height=200)
             st.plotly_chart(fig7,width='stretch', config={'displayModeBar':False})
@@ -1107,7 +1127,7 @@ div[data-testid="stVerticalBlockBorderWrapper"] button[kind="secondary"] {
     border: 1px solid var(--border) !important;
     border-radius: 6px !important;
     font-size: 10.5px !important;
-    color: var(--text2) !important;
+    color: var(--text-secondary) !important;
     text-align: center !important;
     font-family: var(--body) !important;
     line-height: 1.3 !important;
@@ -1120,8 +1140,8 @@ div[data-testid="stVerticalBlockBorderWrapper"] button[kind="secondary"] {
 }
 /* FAB container handled below */
 div[data-testid="stVerticalBlockBorderWrapper"] button[kind="secondary"]:hover {
-    border-color: var(--green2) !important;
-    color: var(--green) !important;
+    border-color: var(--blue-bright) !important;
+    color: var(--cyan) !important;
     background: var(--green-dim) !important;
 }
 /* Close button & send button inside panel */
@@ -1132,7 +1152,7 @@ div[data-testid="stVerticalBlockBorderWrapper"] button[kind="secondary"][data-te
 /* Input inside panel */
 div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stTextInput"] input {
     background: var(--bg3) !important;
-    border: 1px solid var(--border2) !important;
+    border: 1px solid var(--border-glow) !important;
     border-radius: 8px !important;
     color: var(--text) !important;
 }
