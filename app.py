@@ -8,8 +8,7 @@ import tools_logic as logic
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-TZ = ZoneInfo("Africa/Cairo")
-now = datetime.now(TZ)
+now = datetime.now(ZoneInfo("Africa/Cairo"))
 
 
 
