@@ -5,10 +5,9 @@ import plotly.graph_objects as go
 from dotenv import load_dotenv
 from google import genai
 import tools_logic as logic
-from datetime import datetime
-from zoneinfo import ZoneInfo
+from datetime import datetime, timezone, timedelta
 
-TZ = ZoneInfo("Africa/Egypt")
+TZ = timezone(timedelta(hours=3))
 now = datetime.now(TZ)
 
 
