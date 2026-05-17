@@ -16,12 +16,12 @@ class OlistETLPipeline:
     # =========================
     def load_data(self):
 
-        base = os.path.join(self.data_path, "raw data")
-
+        base = self.data_path  # ✅ FIXED
+    
         orders = pd.read_csv(os.path.join(base, "olist_orders_dataset.csv"))
         items = pd.read_csv(os.path.join(base, "olist_order_items_dataset.csv"))
         products = pd.read_csv(os.path.join(base, "olist_products_dataset.csv"))
-
+    
         customers = pd.read_csv(os.path.join(base, "olist_customers_dataset.csv"))
         payments = pd.read_csv(os.path.join(base, "olist_order_payments_dataset.csv"))
         sellers = pd.read_csv(os.path.join(base, "olist_sellers_dataset.csv"))
@@ -29,7 +29,6 @@ class OlistETLPipeline:
         category = pd.read_csv(os.path.join(base, "product_category_name_translation.csv"))
 
         return orders, items, products, customers, payments, sellers, reviews, category
-
     # =========================
     # 2. CLEAN CORE TABLES
     # =========================
