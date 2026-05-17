@@ -7,7 +7,7 @@ from google import genai
 import tools_logic as logic
 from datetime import datetime, timezone, timedelta
 
-TZ = timezone(timedelta(hours=3))
+TZ = timezone(timedelta(hours=+3))
 now = datetime.now(TZ)
 
 
