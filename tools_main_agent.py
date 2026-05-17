@@ -53,7 +53,11 @@ def get_chat():
 def run_tommy_agent(user_query):
     try:
         chat = get_chat()
+        if chat is None:
+            return "⚠️ GEMINI API key not configured"
+
         response = chat.send_message(user_query)
         return response.text
+
     except Exception as e:
-        return f"Error: {e}"
+        return f"Error: {e}""
