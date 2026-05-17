@@ -21,11 +21,6 @@ st.set_page_config(
 
 # ── MASTER CSS ────────────────────────────────────────────────────────────────
 st.markdown("""
-/* ╔══════════════════════════════════════════════════════════════╗
-   ║          OlistIQ — PREMIUM DARK THEME CSS UPGRADE            ║
-   ║    Drop this ENTIRE block inside st.markdown(""" ... """)    ║
-   ╚══════════════════════════════════════════════════════════════╝ */
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
 
