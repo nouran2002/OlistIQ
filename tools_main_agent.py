@@ -12,7 +12,6 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 api_key = st.secrets["GEMINI_API_KEY"]
 client = genai.Client(api_key=api_key)
-
 SYSTEM_PROMPT = (
     "You are Tommy, a proactive Business Intelligence Agent. "
     "CRITICAL: Every time you start a new conversation, your first priority is to "
