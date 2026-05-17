@@ -5,8 +5,7 @@ import plotly.graph_objects as go
 from dotenv import load_dotenv
 from google import genai
 import tools_logic as logic
-from datetime import datetime
-from zoneinfo import ZoneInfo
+
 
 
 
@@ -379,7 +378,7 @@ st.markdown(f"""
 st.markdown(f"""
 <div style="display:flex;align-items:center">
     <span class="live-dot"></span>
-    <span class="live-text">LIVE · {datetime.now(ZoneInfo("Africa/Cairo")).strftime('%d %b %Y  %H:%M')}</span>
+    <span class="live-text">LIVE · {now.strftime('%d %b %Y  %H:%M')}</span>
 </div>
 """, unsafe_allow_html=True)
 
