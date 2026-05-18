@@ -937,7 +937,7 @@ with tab1:
         with c2:
             st.markdown('<div class="chart-panel">', unsafe_allow_html=True)
             st.markdown('<div class="panel-title">GROWTH %</div><div class="panel-sub">Month-over-month change</div>', unsafe_allow_html=True)
-            colors_b = ['#3d8bff' if v>=0 else '#ff3355' for v in mdf['growth'].fillna(0)]
+            colors_b = ['#00d4ff' if v>=0 else '#ff0000' for v in mdf['growth'].fillna(0)]
             fig2 = go.Figure()
             fig2.add_trace(go.Bar(x=mdf['month'], y=mdf['growth'].fillna(0),
                 marker_color=colors_b, hovertemplate='<b>%{x}</b><br>%{y:.1f}%<extra></extra>'))
