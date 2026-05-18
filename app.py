@@ -952,7 +952,7 @@ with tab1:
         fig3 = go.Figure()
         fig3.add_trace(go.Scatter(x=mdf['month'], y=mdf['orders'],
             fill='tozeroy',
-            fillcolor='rgba(61,139,255,0.07)',
+            fillcolor='rgba(0,212,255,0.06)',
             line=dict(color='#00d4ff', width=2.5),
             mode='lines+markers',
             marker=dict(size=5, color='#00d4ff',
