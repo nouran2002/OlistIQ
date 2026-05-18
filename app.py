@@ -981,7 +981,7 @@ with tab2:
         with c2:
             st.markdown('<div class="chart-panel">', unsafe_allow_html=True)
             st.markdown('<div class="panel-title">REVENUE SHARE</div><div class="panel-sub">% of total · top 10</div>', unsafe_allow_html=True)
-            pie_c = ['#E5F6FF','#CFEFFF','#AADEFF','#77C6FF','#429BFF','#1770FF','#004EE0','#0238AD','#002C8A','#011546']
+            pie_c = ['#000B1F','#001D4D','#003080','#0044B3','#0057E6','#1A75FF','#4D9CFF','#80C2FF','#B3E0FF','#E0F7FF']
             fig5 = go.Figure(go.Pie(labels=cdf['category'], values=cdf['revenue'], hole=0.62,
                 marker=dict(colors=pie_c, line=dict(color='#020818', width=2)),
                 hovertemplate='<b>%{label}</b><br>$%{value:,.0f}<br>%{percent}<extra></extra>', textinfo='none'))
