@@ -311,8 +311,9 @@ pyarrow>=14.0.0
 
 **[Nouran Waleed Mohamed]**  
 Data Analyst → AI Data Analyst  
-📧 your.email@example.com  
-🔗 [LinkedIn](https://linkedin.com/in/Nouran waleed) · [GitHub](https://github.com/nouran2002)
+📧 nouran20602@gmail.com  
+🔗 [LinkedIn](https://www.linkedin.com/in/nouran-waleed-0b0196210?utm_source=share_via&utm_content=profile&utm_medium=member_android) · 
+[GitHub](https://github.com/nouran2002)
 
 ---
 
