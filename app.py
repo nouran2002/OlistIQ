@@ -983,7 +983,7 @@ with tab2:
             st.markdown('<div class="panel-title">REVENUE SHARE</div><div class="panel-sub">% of total · top 10</div>', unsafe_allow_html=True)
             pie_c = ['#001433','#001D4D','#003080','#0044B3','#0057E6','#1A75FF','#4D9CFF','#80C2FF','#B3E0FF','#E0F7FF']
             fig5 = go.Figure(go.Pie(labels=cdf['category'], values=cdf['revenue'], hole=0.62,
-                marker=dict(colors=pie_c, line=dict(color='#FFFFFF', width=2)),
+                marker=dict(colors=pie_c, line=dict(color='#BDBDBD', width=2)),
                 hovertemplate='<b>%{label}</b><br>$%{value:,.0f}<br>%{percent}<extra></extra>', textinfo='none'))
             fig5.add_annotation(text=f"${cdf['revenue'].sum()/1e6:.1f}M", x=0.5, y=0.5,
                 showarrow=False, font=dict(family='Bebas Neue',size=26,color='#fff'))
