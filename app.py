@@ -953,9 +953,9 @@ with tab1:
         fig3.add_trace(go.Scatter(x=mdf['month'], y=mdf['orders'],
             fill='tozeroy',
             fillcolor='rgba(61,139,255,0.07)',
-            line=dict(color='#3d8bff', width=2.5),
+            line=dict(color='#00d4ff', width=2.5),
             mode='lines+markers',
-            marker=dict(size=5, color='#3d8bff',
+            marker=dict(size=5, color='#00d4ff',
                         line=dict(color='rgba(61,139,255,0.3)', width=6)),
             hovertemplate='<b>%{x}</b><br>%{y:,} orders<extra></extra>'))
         fig3.update_layout(**CL, height=180)
@@ -983,7 +983,7 @@ with tab2:
             st.markdown('<div class="panel-title">REVENUE SHARE</div><div class="panel-sub">% of total · top 10</div>', unsafe_allow_html=True)
             pie_c = ['#001433','#001D4D','#003080','#0044B3','#0057E6','#1A75FF','#4D9CFF','#80C2FF','#B3E0FF','#E0F7FF']
             fig5 = go.Figure(go.Pie(labels=cdf['category'], values=cdf['revenue'], hole=0.62,
-                marker=dict(colors=pie_c, line=dict(color='#020818', width=2)),
+                marker=dict(colors=pie_c, line=dict(color='#FFFFFF', width=2)),
                 hovertemplate='<b>%{label}</b><br>$%{value:,.0f}<br>%{percent}<extra></extra>', textinfo='none'))
             fig5.add_annotation(text=f"${cdf['revenue'].sum()/1e6:.1f}M", x=0.5, y=0.5,
                 showarrow=False, font=dict(family='Bebas Neue',size=26,color='#fff'))
